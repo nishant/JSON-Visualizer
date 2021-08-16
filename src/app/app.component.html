@@ -1,1 +1,26 @@
 <h1>JSON Visualizer</h1>
+
+<!--Reason behind usage of $any() here:-->
+<!--https://github.com/angular-split/angular-split/issues/220-->
+
+
+<div class="container">
+  <div class="split-example ex-percent">
+    <as-split unit="percent" [direction]="$any('horizontal')" (dragEnd)="dragEnd('percent', $event)" #split="asSplit">
+      <as-split-area [size]="$any('50')" #area1="asSplitArea">
+        <ngs-code-editor
+          [theme]="theme"
+          [codeModel]="codeModel"
+          [options]="options"
+          (valueChanged)="onCodeChanged($event)"
+          style="height: 100%; width: 100%;"
+        >
+        </ngs-code-editor>
+      </as-split-area>
+      <as-split-area [size]="$any('50')" #area2="asSplitArea">
+        <json-tree [json]="data"></json-tree>
+      </as-split-area>
+    </as-split>
+  </div>
+</div>
+

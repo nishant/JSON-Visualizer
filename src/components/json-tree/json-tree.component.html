@@ -1,0 +1,21 @@
+<section class="json-tree">
+  <section
+    *ngFor="let scope of scopes"
+    [ngClass]="['scope', 'scope-type-' + scope.type]">
+    <section
+      (click)="toggle(scope)"
+      [ngClass]="{
+        'scope-main': true,
+        'expandable': isExpandable(scope),
+        'expanded': scope.expanded
+      }">
+      <div *ngIf="isExpandable(scope)" class="toggler"></div>
+      <span class="scope-key">{{ scope.key }}</span>
+      <span class="scope-separator">: </span>
+      <span *ngIf="!scope.expanded || !isExpandable(scope)" class="scope-value">{{ scope.description }}</span>
+    </section>
+    <section *ngIf="scope.expanded && isExpandable(scope)" class="children">
+      <json-tree [json]="scope.value" [expanded]="expanded" [depth]="depth" [currentDepth]="currentDepth"></json-tree>
+    </section>
+  </section>
+</section>
